@@ -1,4 +1,4 @@
-node('php'){
+node('php7'){
     stage('Clean'){
         deleteDir()
         sh 'ls -la'
@@ -32,15 +32,15 @@ node('php'){
     }
 
     stage('Docker Build') {
-        sh 'sudo docker build -t jeffersonsouza/laravel:$BUILD_NUMBER .'
+        sh 'sudo docker build -t mmorais/laravel:$BUILD_NUMBER .'
     }
 
     stage('Docker Ship') {
-        sh 'sudo docker push jeffersonsouza/laravel:$BUILD_NUMBER'
+        sh 'sudo docker push mmorais/laravel:$BUILD_NUMBER'
     }
     
     stage('Clean Up') {
-        sh 'sudo docker rmi jeffersonsouza/laravel:$BUILD_NUMBER'
+        sh 'sudo docker rmi mmorais/laravel:$BUILD_NUMBER'
         deleteDir()
     }
 }
